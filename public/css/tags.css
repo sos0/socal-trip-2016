@@ -1,0 +1,57 @@
+.feed-tag {
+  color: #630023 !important;
+}
+
+.daze-tag {
+  background-size: cover;
+  background-position-y: 50%;
+}
+
+.meta::before {
+
+}
+
+.feed-tag {
+  margin: 0 auto;
+  vertical-align: middle !important;
+}
+
+.daze-tag div {
+  padding-top: 100%;
+}
+
+.text-only {
+  background-image: url("/images/tags-text.png");
+}
+
+.wtf {
+  background-image: url("/images/tag-wtf.png");
+}
+
+.hangout {
+ background-image: url("/images/tag-hangout.png");
+}
+
+.cop {
+  background-image: url("/images/tag-cop.png");
+}
+
+.cool {
+  background-image: url("/images/tag-cool.png");
+}
+
+.club {
+  background-image: url("/images/tag-club.png");
+}
+
+.music {
+  background-image: url("/images/tag-music.png");
+}
+
+.study {
+  background-image: url("/images/tag-study.png");
+}
+
+.event {
+  background-image: url("/images/tag-event.png");
+}

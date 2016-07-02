@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Daze by Developers' Guild</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/css/tags.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/semantic.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection">
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css' rel='stylesheet' />
+
+    <style>
+
+body {
+  background: #e8e8e8;
+}
+
+.modal-wrap {
+  position:absolute;
+  z-index:1;
+  width:100%;
+  margin:0 auto;
+  visibility:hidden;
+  top: 20%; left: 0; bottom: 0; right: 0;
+}
+
+.modal-wrap2 {
+  position:absolute;
+  z-index:1;
+  width:100%;
+  margin:0 auto;
+  visibility:hidden;
+  pointer-events: none;
+  top: 80%; left: 0; bottom: 0; right: 0;
+  opacity: 0.9;
+
+}
+
+.modal-wrap3 {
+  position:absolute;
+  z-index:1;
+  width:100%;
+  margin:0 auto;
+  visibility:hidden;
+  top: 80%; left: 0; bottom: 0; right: 0;
+}
+
+.wrap {
+  text-align:center;
+  margin:0 auto;
+  max-width:320px;
+  font-family:monospace;
+}
+
+.frame {
+  display: inline-block;
+  height: 50px;
+  line-height: 250px;
+  overflow: hidden;
+  width: 170px;
+  margin: 0 auto;
+}
+
+.frame ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-size: 16px;
+}
+
+.frame ul li {
+  float: left;
+  width: 50px;
+  height: 100%;
+  border-radius: 50%;
+  margin: 0 10px 0 0;
+  padding: 0;
+  background: #ae808e;
+  /*background: #AAA;*/
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  line-height: 50px;
+}
+
+.frame ul li.active {
+  color: #fff;
+  background: #111;
+}
+
+input, textarea {
+  background: transparent !important;
+  border: none;
+  display: inline-block;
+  text-align: left;
+  margin-top: 0 !important;
+  height: 17px;
+}
+
+input:focus, textarea:focus {
+  background: transparent transparent !important;
+  outline: none;
+  color: black !important;
+}
+
+.add-marker-btn:hover {
+  color:#EEE;
+  background:#111 !important;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background:#d2bdc3;
+}
+
+::-webkit-scrollbar-thumb {
+  background:#222;
+}
+
+.add-marker-header {
+  background:#d2bdc3;
+  /*background:#BBB; #82394F */
+  padding-bottom:20px;
+}
+
+.marker-info-header{
+  background:#d2bdc3;
+}
+
+.add-marker-body, .marker-info-body {
+  /*background:#777;*/
+  background:#764051;
+  padding:36px 20px;
+}
+
+
+.marker-title {
+  padding: 42px;
+  font-size:13.3333330154419px;
+}
+
+.marker-title input{
+  color: #000;
+  text-align: center;
+  border-radius: 0 !important;
+}
+
+.marker-title ::-webkit-input-placeholder {
+   color: #000;
+}
+
+.marker-title :-moz-placeholder { /* Firefox 18- */
+   color: #000;
+}
+
+.marker-title ::-moz-placeholder {  /* Firefox 19+ */
+   color: #000;
+}
+
+.marker-title:-ms-input-placeholder {
+   color: #000;
+}
+
+.marker-content {
+  width:80%;
+  height:60px;
+  resize:none;
+}
+
+.marker-location {
+  padding:16px 16px 0 44px;
+}
+
+#marker-info .marker-location{
+  padding:16px 16px 0 48px;
+}
+
+.marker-info-body .fa-map-marker{
+  float: left;
+}
+
+.marker-location input {
+  margin-left:18px;
+  padding-left: 12px !important;
+  font-family:monospace;
+}
+
+.marker-time {
+  padding:16px 16px 0 48px;
+}
+
+.marker-time input {
+  margin-left:16px;
+  font-family:monospace;
+  font-weight: 100;
+}
+
+.fa-chevron-left, .fa-chevron-right {
+  color:#222;
+  line-height:50px;
+  vertical-align:top;
+  padding:0 12px;
+}
+
+.fa-chevron-left:hover, .fa-chevron-right:hover {
+  color:black;
+}
+
+.clearfix {
+  -webkit-transform: translateZ(0px) translateX(0px);
+  width: 6840px;
+}
+
+.fa-map-marker {
+  margin-left:2px;
+}
+
+.fa-clock-o {
+  float: left;
+}
+
+.add-marker-btn {
+  background:#222;
+  color:#DDD;
+  padding:16px;
+  letter-spacing:5px;
+  line-height: 28px;
+  height: 28px;
+  width: 88%;
+  box-sizing: content-box;
+}
+
+.visible {
+  visibility: visible !important;
+}
+
+*::-webkit-input-placeholder {
+  color: #d2bdc3;
+}
+*:-moz-placeholder {
+  /* FF 4-18 */
+  color: #d2bdc3;
+}
+*::-moz-placeholder {
+  /* FF 19+ */
+  color: #d2bdc3;
+}
+*:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #d2bdc3;
+}
+
+.close {
+  display: inline-block;
+  font-size: 18px;
+  text-align: right;
+  padding: 10px 15px;
+  float: right;
+}
+
+.marker-location span{
+  padding-left: 24px;
+}
+
+.marker-time span{
+  padding-left: 20px;
+}
+
+.marker-info-body{
+  text-align: left;
+}
+
+    </style>
+</head>
+
+<body>
+  <header>
+    <div class="ui menu">
+      <a class="item" id="feed-btn">
+        <i class="fa fa-list"></i>
+      </a>
+      <div class="right text icon menu">
+        <a class="item" {% if isLoggedIn %}id="live-btn"{% else %}href="/"{% endif %}>
+          <i class="fa fa-plus"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="ui left vertical labeled icon sidebar menu" id="feed-menu" style="width: 500px;">
+      <div class="header">
+        <div class="ui menu">
+          <div class="left text icon menu">
+            <p class="item">Feed</p>
+          </div>
+          <div class="right text icon menu">
+            {% if isLoggedIn %}
+              <a class="item" href="/logout">Logout</a>
+            {% else %}
+              <a class="item" href="/">Login/Signup</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <!--<a class="item" href="#">
+
+        <div class="ui feed">
+          <div class="event">
+            <div class="label feed-tag">
+              <div class="daze-tag">
+                  <div class="wtf">
+                  </div>
+                </div>
+            </div>
+            <div class="content">
+              <div class="summary">
+                Developers Guild meeting at ATC 309 on 1:30PM-3:30PM!
+              </div>
+
+              <div class="meta">
+                ATC 309 • 1:30PM - 3:30PM • Posted 3 hours ago
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    -->
+    <a class="item">
+        <div class="ui feed">
+          <div class="event">
+
+            <div class="content">
+              <div class="summary">
+                Coming Soon!
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  <!-- add marker modal -->
+   <div class="modal-wrap" id="add-marker">
+    <div class="wrap">
+      <form id="add-marker-form" action="/addmarker" method="POST">
+      <div class="add-marker-header">
+        <div class="close">&times;</div>
+
+        <div class="marker-title">
+          <input type="text" name="title" placeholder="Event title">
+        </div>
+
+        <i class="btn prev fa fa-chevron-left fa-2x"></i>
+        <div class="frame" id="forcecentered">
+          <ul class="clearfix">
+            <li name="WTF">
+              <div class="daze-tag wtf text-only"><div></div></div>
+            </li>
+            <li name="hangout">
+              <div class="daze-tag hangout text-only"><div></div></div>
+            </li>
+            <li name="cop">
+              <div class="daze-tag cop text-only"><div></div></div>
+            </li>
+            <li name="cool">
+              <div class="daze-tag cool text-only"><div></div></div>
+            </li>
+            <li name="club">
+              <div class="daze-tag club text-only"><div></div></div>
+            </li>
+            <li name="music">
+              <div class="daze-tag music text-only"><div></div></div>
+            </li>
+            <li name="study">
+              <div class="daze-tag study text-only"><div></div></div>
+            </li>
+            <li name="event">
+              <div class="daze-tag event text-only"><div></div></div>
+            </li>
+          </ul>
+        </div>
+        <i class="btn next fa fa-chevron-right fa-2x"></i>
+      </div>
+
+      <div class="add-marker-body" id="add-marker">
+        <textarea class="marker-content" name="description" placeholder="What's happening?" maxlength="140"></textarea>
+        <div class="marker-location">
+          <i class="fa fa-map-marker"></i>
+          <input placeholder="Where?" name="location">
+        </div>
+    <!--    <div class="marker-time">
+          <i class="fa fa-clock-o add-on"></i>
+          <input type="text" name="timepicker" class="time_element" placeholder="When?"/>
+        </div>
+    -->
+      </div>
+      <button class="add-marker-btn">ADD</button>
+      </form>
+    </div>
+  </div>
+  <!-- END add marker modal -->
+
+  <!-- marker info modal -->
+  <div class="modal-wrap" id="marker-info">
+      <div class="wrap">
+        <div class="marker-info-header">
+          <div class="close">&times;</div>
+          <div class="marker-title" id="info-title"></div>
+        </div>
+          <div class="marker-info-body">
+            <div >
+              <span id="info-description"></span>
+            </div>
+            <div class="marker-location">
+              <i class="fa fa-map-marker"></i><span id="info-location"></span>
+            </div>
+            <!--
+            <div class="marker-time">
+              <i class="fa fa-clock-o add-on"></i><span>1:30PM-3:30PM</span>
+            </div>
+            -->
+          </div>
+      </div>
+  </div>
+  <!-- END marker info modal -->
+
+  <div class="modal-wrap2" id="add-marker-diag">
+      <div class="wrap">
+        <div class="marker-info-header">
+          <div class="marker-title">Click where you want to place your marker.</div>
+        </div>
+      </div>
+  </div>
+
+  <div class="modal-wrap3" id="error">
+      <div class="wrap">
+        <div class="marker-info-header">
+        <div class="close">&times;</div>
+          <div class="marker-title error-text"></div>
+        </div>
+      </div>
+  </div>
+
+    <div class="ui right vertical wide sidebar menu" id="add-menu">
+        <div class="header item">
+            Add Marker
+        </div>
+        <div class="item">
+            <div class="ui input"><input type="text" placeholder="Also demo" style="width:90%;"></div>
+        </div>
+    </div>
+    <div class="ui first coupled small modal">
+        <div class="header">
+          Modal #1
+        </div>
+        <div class="content">
+          <div class="image">
+            <i class="fa fa-arrow-right"></i>
+          </div>
+          <div class="description">
+            <div class="ui form">
+              <div class="field">
+                  <label>Username</label>
+                  <input placeholder="Username" type="text">
+                </div>
+                <div class="field">
+                  <label>Password</label>
+                  <input type="password">
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="primary ui button">Proceed</div>
+        </div>
+      </div>
+      <div class="ui small second coupled modal">
+        <div class="header">
+          Modal #2
+        </div>
+        <div class="content">
+          <div class="description">
+            <p>Message for user to indicate login success/fail.</p>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui approve button">
+            <i class="fa fa-check"></i>
+            All Done
+          </div>
+        </div>
+      </div>
+    <div class="wrapper">
+      <div id='mapbox-container'>
+          <div id='map'></div>
+      </div>
+    </div>
+
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/semantic.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="/js/bootstrap-timepicker.min.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.js'></script>
+    <script src="/js/sly.vendor.js"></script>
+    <script src="/js/sly.js"></script>
+    <script src="/js/timepicki.js"></script>
+    <script>
+    $(document).ready(function(){
+      $(".time_element").timepicki();
+    });
+    </script>
+
+</body>
+</html>

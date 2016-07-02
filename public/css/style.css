@@ -1,0 +1,212 @@
+@font-face{
+	font-family: ephesus;
+	src: url(../fonts/ephesus-demo-extrabold.otf);
+}
+
+.daze-img{
+	margin: 0.3em;
+}
+
+.ui.menu{
+	background-image: url('/images/daze-100.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: auto 25px;
+}
+
+#daze-title-text{
+	font-family: ephesus;
+	text-transform: capitalize;
+	font-size: 2em;
+	line-height: 1.2em;
+	color: rgba(255,255,255,0);
+}
+
+.wrapper{
+	margin: 2%;
+}
+
+#mapbox-container{
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+}
+
+#daze-header{
+	position: absolute;
+	top: 5%;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	z-index: 1;
+	display: none;
+}
+
+#map{
+	position: fixed;
+	top: 35px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.fixed-action-btn{
+	position: absolute;
+	top: 50%;
+	right: 3em;
+	max-width: 3em;
+}
+
+/* sidebar */
+@media only screen and (max-width: @computerBreakpoint) {
+  html.ios {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* mobile */
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
+	.ui.centered.header, .ui.center.aligned.header{
+		font-size: 3.5em;
+	}
+	h2.ui.header .sub.header{
+		font-size: 2.1428em;
+	}
+
+	#mapbox-container{
+		margin: 0 auto;
+		width: 900px;
+		height: 900px;
+	}
+}
+
+a:visited, a:hover, a:active {
+  color: black;
+}
+
+input {
+  background: transparent !important;
+}
+
+input:focus {
+  background: transparent transparent !important;
+  color: white !important;
+  outline: none;
+}
+
+#splash, #login, #signup{
+  margin: 0 !important;
+  width: 100%;
+  height: 100%;
+}
+
+.ui.dimmer {
+  background: #82394F !important;
+}
+
+input {
+  color: black;
+  display: block;
+  margin: 0 auto !important;
+  border: 2px solid white;
+  border-radius: 30px;
+  padding: 0 12px;
+  text-align: center;
+  height: 30px;
+  margin-top: 16px !important;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+  color: #000000;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #000000;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #000000;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #000000;
+}
+
+/*
+SPLASH SCREEN
+*/
+
+.splash {
+	background: #630023;
+	height:100%;
+	width:100%;
+	font-family:'Open Sans';
+	font-weight:100;
+	text-align:center;
+}
+
+.splash .logo img {
+	display:block;
+	margin: 0 auto;
+	height:auto;
+	width:auto;
+	max-height: 200px;
+	padding-top:100px;
+}
+
+.splash .logo h1 {
+	text-align:center;
+	font-family: ephesus;
+	color: #FFFFFF;
+	font-size:50px;
+}
+
+.splash .tagline {
+	font-size:26px;
+	margin-top:5px;
+	color: white;
+}
+
+.splash .btn-menu {
+	line-height:30px;
+	margin-top:16px;
+	color:#FFFFFF;
+	letter-spacing:6px;
+}
+
+.splash .btn {
+	display:inline-block;
+	border-radius:30px;
+	height:30px;
+	width:100px;
+	border:1px
+	solid white;
+	padding-left:6px;
+	color: white;
+}
+
+.splash .btn .secondary {
+	margin-top: 16px;
+}
+
+.modal label {
+	color: white !important;
+}
+
+.modal input {
+	border: 1px solid white !important;
+}
+
+.login .button {
+	width: 100% !important;
+}
+
+.join .button {
+  width: 100% !important;
+}
+
+.error1 .button {
+  width: 100% !important;
+}
+
+.error2 .button {
+  width: 100% !important;
+}

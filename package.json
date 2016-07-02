@@ -1,0 +1,30 @@
+{
+  "name": "DAWaze-frontend",
+  "version": "0.1.0",
+  "description": "This is the frontend for De Anza: Waze",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DevelopersGuild/DAWaze-frontend.git"
+  },
+  "author": "Developers' Guild Web Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DevelopersGuild/DAWaze-frontend/issues"
+  },
+  "homepage": "https://github.com/DevelopersGuild/DAWaze-frontend",
+  "dependencies": {
+    "async": "^0.9.0",
+    "body-parser": "^1.12.3",
+    "cookie-parser": "^1.3.5",
+    "express": "^4.12.3",
+    "nunjucks": "^1.3.3",
+    "request": "^2.55.0",
+    "serve-favicon": "^2.2.0",
+    "socket.io": "^1.3.5",
+    "validator": "^3.38.0"
+  }
+}

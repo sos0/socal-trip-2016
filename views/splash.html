@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daze by Developers' Guild</title>
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/semantic.min.css" type="text/css">
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css' rel='stylesheet' />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+    <div class="splash">
+      <div class="logo">
+        <img src="/images/daze-white_1024.png">
+        <h1>DAZE</h1>
+      </div>
+      <div class="tagline">Campus Community App</br>for De Anza College</div>
+      <div class="btn-menu">
+        <a href="home" class="btn">ENTER</a>
+        <a href="#" id="login-btn" class="btn secondary">LOGIN</a>
+        <a href="#" id="join-btn" class="btn secondary">JOIN</a>
+      </div>
+    </div>
+
+    <div class="ui basic modal login">
+      <i class="close fa fa-close"></i>
+      <div class="header">
+        Login
+      </div>
+      <div class="content">
+        <div class="ui form">
+         <form id="login-form" action="/login" method="POST">
+            <div class="field">
+              <label>Username/Email</label>
+              <input type="text" name="usernameEmail">
+            </div>
+            <div class="field">
+              <label>Password</label>
+              <input type="password" name="password">
+            </div>
+            <button class="ui green basic inverted button"><i class="fa fa-lock"></i>  Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui basic modal join">
+      <i class="close fa fa-close"></i>
+      <div class="header">
+        Join
+      </div>
+      <div class="content">
+        <div class="ui form">
+         <form action="/join" method="POST" id="signup-form">
+            <div class="field">
+              <label>Username</label>
+              <input type="text" name="username">
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="text" name="email">
+            </div>
+            <div class="field">
+              <label>Password</label>
+              <input type="password" name="password">
+            </div>
+            <button class="ui green basic inverted button"><i class="fa fa-lock"></i>  Join</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui basic modal error1">
+      <div class="header">
+        Error
+      </div>
+      <div class="content">
+        <div class="description">
+          <p class="error-text"></p>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="two fluid ui inverted buttons">
+          <div class="ui green basic inverted button" id="error1-btn">
+            Got It!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui basic modal error2">
+      <div class="header">
+        Error
+      </div>
+      <div class="content">
+        <div class="description">
+          <p class="error-text"></p>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="two fluid ui inverted buttons">
+          <div class="ui green basic inverted button" id="error2-btn">
+            Got It!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/js/semantic.min.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.js'></script>
+    <script type="text/javascript">
+      'use strict';
+      $('.login').modal('attach events', '#login-btn', 'show');
+      $('.login').modal('attach events', '#error1-btn', 'show');
+      $('.join').modal('attach events', '#join-btn', 'show');
+      $('.join').modal('attach events', '#error2-btn', 'show');
+
+      $('#login-form').submit(function() {
+
+        $.ajax({
+          url : $('#login-form').attr('action'),
+          type: $('#login-form').attr('method'),
+          data: $('#login-form').serialize(),
+          error: function(res) {
+            var message = res.responseText || 'Something went wrong with the server.';
+            $('.error-text').text(message);
+            $('.error1').modal('show');
+          },
+          success: function(res) {
+
+            window.location.replace('/home');
+
+          }
+        });
+
+        // Return false so we don't submit twice
+        return false;
+      });
+
+      $('#signup-form').submit(function() {
+
+        $.ajax({
+          url : $('#signup-form').attr('action'),
+          type: $('#signup-form').attr('method'),
+          data: $('#signup-form').serialize(),
+          error: function(res) {
+            var message = res.responseText || 'Something went wrong with the server.';
+            $('.error-text').text(message);
+            $('.error2').modal('show');
+          },
+          success: function(res) {
+            window.location.replace('/home');
+          }
+        });
+
+        // Return false so we don't submit twice
+        return false;
+      });
+
+    </script>
+</body>
+</html>
